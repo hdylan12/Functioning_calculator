@@ -25,7 +25,7 @@ class CalculatorScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Display area
+            // Display area (placeholder)
             Container(
               height: 100,
               decoration: BoxDecoration(
@@ -43,40 +43,40 @@ class CalculatorScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CalculatorButton('7'),
-                CalculatorButton('8'),
-                CalculatorButton('9'),
-                CalculatorButton('C', color: Colors.red), // Delete button
+                RoundCalculatorButton('7'),
+                RoundCalculatorButton('8'),
+                RoundCalculatorButton('9'),
+                RoundCalculatorButton('C', backgroundColor: Colors.red), // Clear button
               ],
             ),
             SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CalculatorButton('4'),
-                CalculatorButton('5'),
-                CalculatorButton('6'),
-                CalculatorButton('*', color: Colors.blue), // Multiply button
+                RoundCalculatorButton('4'),
+                RoundCalculatorButton('5'),
+                RoundCalculatorButton('6'),
+                RoundCalculatorButton('*', backgroundColor: Colors.blue), // Multiply button
               ],
             ),
             SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CalculatorButton('1'),
-                CalculatorButton('2'),
-                CalculatorButton('3'),
-                CalculatorButton('-', color: Colors.blue), // Minus button
+                RoundCalculatorButton('1'),
+                RoundCalculatorButton('2'),
+                RoundCalculatorButton('3'),
+                RoundCalculatorButton('-', backgroundColor: Colors.blue), // Minus button
               ],
             ),
             SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CalculatorButton('0', color: Colors.grey[300]), // Color for '0' button
-                CalculatorButton('.', color: Colors.blue), // Dot button
-                CalculatorButton('=', color: Colors.blue), // Equals button
-                CalculatorButton('+', color: Colors.blue), // Plus button
+                RoundCalculatorButton('0'),
+                RoundCalculatorButton('.', backgroundColor: Colors.blue), // Dot button
+                RoundCalculatorButton('=', backgroundColor: Colors.blue), // Equals button
+                RoundCalculatorButton('+', backgroundColor: Colors.blue), // Plus button
               ],
             ),
           ],
@@ -86,24 +86,25 @@ class CalculatorScreen extends StatelessWidget {
   }
 }
 
-class CalculatorButton extends StatelessWidget {
+class RoundCalculatorButton extends StatelessWidget {
   final String text;
-  final Color color;
+  final Color? backgroundColor;
 
-  CalculatorButton(this.text, {this.color});
+  RoundCalculatorButton(this.text, {this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(50),
-      child: CircleAvatar(
-        radius: 30,
-        backgroundColor: color ?? Colors.grey[300],
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 24, color: Colors.black),
-        ),
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor ?? Colors.grey[300],
+        padding: EdgeInsets.all(20),
+        minimumSize: Size(80, 80),
+        shape: CircleBorder(),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 24),
       ),
     );
   }
